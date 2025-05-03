@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            background-image: url('https://img.freepik.com/premium-photo/morskie-oko-tatry_1045114-186.jpg?semt=ais_hybrid&w=740');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        
+        h2,
+        h3 {
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        }
+        
+        .product {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product span {
+            font-weight: bold;
+        }
+        
+        button {
+            background-color: #34c759;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background-color: #28a745;
+        }
+        
+        #cart {
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        #total {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Products</h2>
+
+    <div class="product">
+        <span>Product 1 - $10</span>
+        <button onclick="addToCart('Product 1', 10)">Add</button>
+    </div>
+
+    <div class="product">
+        <span>Product 2 - $15</span>
+        <button onclick="addToCart('Product 2', 15)">Add</button>
+    </div>
+
+    <div class="product">
+        <span>Product 3 - $20</span>
+        <button onclick="addToCart('Product 3', 20)">Add</button>
+    </div>
+
+    <div id="cart">
+        <h3>Your Cart</h3>
+        <ul id="cartItems"></ul>
+        <p id="total">Total: $0</p>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(name, price) {
+            cart.push({
+                name,
+                price
+            });
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price}`;
+                cartItems.appendChild(li);
+            });
+            document.getElementById('total').textContent = `Total: $${total}`;
+        }
+    </script>
+
+</body>
+
+</html>
